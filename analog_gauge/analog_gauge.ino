@@ -7,7 +7,13 @@
  * Please read the repository readme for further informations and explainations.
  * https://github.com/cyb3rn0id/Analog_Gauge_Arduino
  
- * I made this example using the Arduino Every and an ST7735 display (128x160) 
+ * I made this example using the Arduino Nano Every and an 1.8" ST7735 display (128x160)
+ * and 2 potentiometers attached to A0 and A1 analog inputs.
+ * 
+ * WARNING:
+ * Arduino Nano Every works at 5V while most of the ST7735 displays are 3.3V.
+ * I've used a variant of this display having a voltage regulator and a level shifter
+ * on board so I can attach the display directly to the Arduino.
  *
  */
 

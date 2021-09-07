@@ -1,4 +1,4 @@
-### Analog Gauge
+## Analog Gauge
 
 This is an example of an Analog Gauge for TFT screens to be used on Arduino with the [UCG Library](https://github.com/olikraus/ucglib).
 
@@ -8,7 +8,13 @@ This example started from an [Instructable by Bodmer](https://www.instructables.
 
 I've made some modifications to it for having a parametrized gauge callable as function and so having also more than one gauge on the screen (even if you must redefine functions for pointers, you'll see). I've changed some things in the code for making it more understandable and opened to modifications.
 
-#### Analog gauge drawing
+For the example I've used an Arduino Nano Every, an 1.8" ST7735 display and 2 potentiometers attached on A0 and A1 for reading values.
+
+### Note about used Display/Arduino
+
+Arduino Nano Every works at 5V while most of ST7735 displays are 3.3V only. I've used a display having the voltage regulator and a level shifter on board so I can use it directly attached to the Arduino Nano Every.
+
+### Analog gauge drawing
 
 You can paint the gauge on the screen calling the function:
 
@@ -34,7 +40,7 @@ where:
 
 This function will be called only once, at startup.
 
-#### Pointer drawing
+### Pointer drawing
 
 The fuction for painting the pointer is defined as:
 
