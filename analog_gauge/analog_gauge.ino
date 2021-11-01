@@ -7,25 +7,26 @@
  * Please read the repository readme for further informations and explainations.
  * https://github.com/cyb3rn0id/Analog_Gauge_Arduino
  
- * I made this example using the Arduino Nano Every and an 1.8" ST7735 display (128x160)
+ * I made this example using the Arduino Nano (and Nano Every) and an 1.8" ST7735 display (128x160)
  * and 2 potentiometers attached to A0 and A1 analog inputs.
  * 
  * WARNING:
- * Arduino Nano Every works at 5V while most of the ST7735 displays are 3.3V.
- * I've used a variant of this display having a voltage regulator and a level shifter
- * on board so I can attach the display directly to the Arduino.
+ * Arduino Nano works at 5V while the ST7735 displays are 3.3V.
+ * please read the Readme in the repository for further informations 
+ * on those kind of displays
  *
  */
 
 #include <SPI.h>
 #include "Ucglib.h"
 
-// ST7735 display to Arduino Every connections:
+// ST7735 display to Arduino Nano (or Nano Every) connections:
 // CLK : 13
 // SDA : 11
 // RS  :  9 (is called "CD" from the library. RS=register select, CD=command/data => is the same thing!)
 // CS  : 10
 // RST :  8
+// notice: on some displays, RS is marked as 'A0'
 
 // display instance using software SPI (first) or hardware SPI (second)
 //Ucglib_ST7735_18x128x160_SWSPI ucg(/*sclk=*/ 13, /*data=*/ 11, /*cd=*/ 9, /*cs=*/ 10, /*reset=*/ 8);
