@@ -60,20 +60,14 @@ This function will be called only once, at startup.
 
 The fuction for painting the pointer is defined as:
 
-<code>void drawPointer(uint8_t x, uint8_t y, uint8_t arc, uint8_t radius, float value, float minval, float maxval)</code>
+<code>drawPointer(DrawContext &ctx, float value)</code>
 
 where:
 
-- <code>x</code>, <code>y</code> : are the coordinates of the "pivot" point of the pointer (where pointer starts). You must use the same coordinates used for the gauge
+- <code>&ctx</code> : pointer to the `DrawContext` structure defined for the pointer (see example)
 
-- <code>arc</code>, <code>radius</code> : have the same meaning used for the gauge, so use the same values
-
-- <code>value</code> : value where the pointer points
-
-- <code>minval</code>, <code>maxval</code> : minimum and maxim values pointer can point to. Usually are the same as <code>gaugemin</code> and <code>gaugemax</code> but you can exceed those values for making pointer go out of scale.
+- <code>value</code> : value to be pointed
 
 You must call this function everytime you must update the value to be shown. Function itself saves the previous value so it exits quickly, without redrawing all, if passed value to function is the same of the previous call.
 
 The pointer length is hardwired in code (<code>nl</code> variable in the function). The lower part of the pointer (pivot point) will not visible: imagine the pivot point of the pointer covered by a circle. You will see the lower part of the pointer describing an arc while moving. This happens also on most analog gauges in the real such as in Vu-meters for example.
-
-Since the <code>drawPointer</code> function uses static variables for keeping in memory the last pointer position for deleting the pointer when a refresh happens, you cannot use the same function for drawing more than a pointer. This is so I've copied and pasted the function giving it the name <code>drawPointer2</code> name for using it with the second gauge in the example.
