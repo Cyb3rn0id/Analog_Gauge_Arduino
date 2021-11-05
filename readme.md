@@ -52,7 +52,7 @@ where:
 
 - <code>decimals</code> : number of decimals to be shown on the labels of main ticks. 0 will print no decimals
 
-- <code>gz</code>, <code>y</code> : value for painting green zone and yellow zone respectively. A green arc will be painted from "gaugemin" value to "gz" value. A yellow arc will be painter from "gz" to "yz" value and a red arc will be painted from "yz" to "gaugemax" value.
+- <code>gz</code>, <code>yz</code> : value for painting green zone and yellow zone respectively. A green arc will be painted from "gaugemin" value to "gz" value. A yellow arc will be painter from "gz" to "yz" value and a red arc will be painted from "yz" to "gaugemax" value.
 
 This function will be called only once, at startup.
 
