@@ -104,8 +104,8 @@ void setup(void)
 
   // draw the two gauges
   // void drawGauge(uint8_t x, uint8_t y, uint8_t arc, uint8_t radius, uint8_t stp, uint8_t tickl, float gaugemin, float gaugemax, uint8_t decimals, float gz, float yz)
-  drawGauge(G1_X, G1_Y, G1_ARC, G1_RADIUS, 5, 15, 0, 100, 0, 50, 75);
-  drawGauge(G2_X, G2_Y, G2_ARC, G2_RADIUS, 5, 15, -50, 50, 0, 45, 50);
+  drawGauge(G1_X, G1_Y, G1_ARC, G1_RADIUS, 5, 15, 3, 0, 100, 0, 50, 75);
+  drawGauge(G2_X, G2_Y, G2_ARC, G2_RADIUS, 5, 15, 3, -50, 50, 0, 45, 50);
   }
 
 void loop(void)
@@ -157,7 +157,7 @@ void loop(void)
     }
  }
 
-void drawGauge(uint8_t x, uint8_t y, uint8_t arc, uint8_t radius, uint8_t stp, uint8_t tickl, float gaugemin, float gaugemax, uint8_t decimals, float gz, float yz)
+void drawGauge(uint8_t x, uint8_t y, uint8_t arc, uint8_t radius, uint8_t stp, uint8_t tickl, uint8_t zones, float gaugemin, float gaugemax, uint8_t decimals, float gz, float yz)
   {
   int amin = -((int)arc/2);
   int amax = (arc/2)+1;
@@ -212,7 +212,7 @@ void drawGauge(uint8_t x, uint8_t y, uint8_t arc, uint8_t radius, uint8_t stp, u
     
     // Check if this is a "Short" scale tick
     uint8_t tl=tickl;
-    if (i % (arc/4) != 0) tl=(tickl/2)+1;
+    if (i % (arc/zones) != 0) tl=(tickl/2)+1;
     
     // Recalculate coords in case tick length is changed
     x0 = sx * (radius + tl) + x;
@@ -225,7 +225,7 @@ void drawGauge(uint8_t x, uint8_t y, uint8_t arc, uint8_t radius, uint8_t stp, u
     ucg.drawLine(x0, y0, x1, y1);
     
     // Check if labels should be drawn
-    if (i % (arc/4) == 0) // gauge will have 5 main ticks at 0, 25, 50, 75 and 100% of the scale
+    if (i % (arc/zones) == 0) // gauge will have 5 main ticks at 0, 25, 50, 75 and 100% of the scale
       {
       // Calculate label positions
       x0 = sx * (radius + tl + 10) + x - 5; // 10, 5 are my offset for the font I've used for labels
