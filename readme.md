@@ -22,6 +22,7 @@ Both kind of displays has a 3.3V regulator on board (the XC6206P332MR marked as 
 Then you can use the type 1) directly attached on Arduino Nano since has a Level shifter on board. Display type 2) can't be attached directly to Ardino but needs an external level shifter. Most of people uses in-series restistors but I not consider this a good solution since limits the current, not the voltage. I advice to use a level shifter breakout board such as the one based on the Texas Instruments TXS0108E.
 
 Using that level shifter remember to:
+
 - attach display to "A" port
 - attach Arduino to "B" port
 - connect VA of the shifter to 3.3V on Arduino
@@ -34,25 +35,25 @@ The "LED" pin of display has usually a 3.3Ohm resistor on-board and goes to 5V.
 
 You can paint the gauge on the screen calling the function:
 
-<code>void drawGauge(uint8_t x, uint8_t y, uint8_t arc, uint8_t radius, uint8_t stp, uint8_t tickl, float gaugemin, float gaugemax, uint8_t decimals, float gz, float yz)</code>
+`void drawGauge(uint8_t x, uint8_t y, uint8_t arc, uint8_t radius, uint8_t stp, uint8_t tickl, float gaugemin, float gaugemax, uint8_t decimals, float gz, float yz)`
 
 where:
 
-- <code>x</code>, <code>y</code> : are the coordinates of the center of the circle that will describe the gauge. Imagine the Gauge as a top arc of a circle. The pointer will be fixed in this center (even if not visible).
+- `x`, `y`: are the coordinates of the center of the circle that will describe the gauge. Imagine the Gauge as a top arc of a circle. The pointer will be fixed in this center (even if not visible).
 
-- <code>arc</code> : arc of circle in degree that will describe the gauge. Valid values up to 180.
+- `arc` : arc of circle in degree that will describe the gauge. Valid values up to 180.
 
-- <code>radius</code> : radius of the circle that will describe the gauge
+- `radius` : radius of the circle that will describe the gauge
 
-- <code>stp</code> : steps, number of "minor" ticks between main ticks. Main ticks are hard-wired as 5
+- `stp` : steps, number of "minor" ticks between main ticks. Main ticks are hard-wired as 5
 
-- <code>tickl</code> : length, in pixel, of the main ticks. Minor ticks will be a fraction of this
+- `tickl` : length, in pixel, of the main ticks. Minor ticks will be a fraction of this
 
-- <code>gaugemin</code>, <code>gaugemax</code> : minimum and maximum value on the scale. Are float values so you can use decimal and negative numbers too. Only numbers on main ticks will be drawn.
+- `gaugemin`, `gaugemax` : minimum and maximum value on the scale. Are float values so you can use decimal and negative numbers too. Only numbers on main ticks will be drawn.
 
-- <code>decimals</code> : number of decimals to be shown on the labels of main ticks. 0 will print no decimals
+- `decimals` : number of decimals to be shown on the labels of main ticks. 0 will print no decimals
 
-- <code>gz</code>, <code>yz</code> : value for painting green zone and yellow zone respectively. A green arc will be painted from "gaugemin" value to "gz" value. A yellow arc will be painter from "gz" to "yz" value and a red arc will be painted from "yz" to "gaugemax" value.
+- `gz`, `yz` : value for painting green zone and yellow zone respectively. A green arc will be painted from "gaugemin" value to "gz" value. A yellow arc will be painter from "gz" to "yz" value and a red arc will be painted from "yz" to "gaugemax" value.
 
 This function will be called only once, at startup.
 
@@ -60,14 +61,14 @@ This function will be called only once, at startup.
 
 The fuction for painting the pointer is defined as:
 
-<code>drawPointer(DrawContext &ctx, float value)</code>
+`drawPointer(DrawContext &ctx, float value)`
 
 where:
 
-- <code>&ctx</code> : pointer to the `DrawContext` structure defined for the pointer (see example)
+- `&ctx` : pointer to the `DrawContext` structure defined for the pointer (see example)
 
-- <code>value</code> : value to be pointed
+- `value` : value to be pointed
 
 You must call this function everytime you must update the value to be shown. Function itself saves the previous value so it exits quickly, without redrawing all, if passed value to function is the same of the previous call.
 
-The pointer length is hardwired in code (<code>nl</code> variable in the function). The lower part of the pointer (pivot point) will not visible: imagine the pivot point of the pointer covered by a circle. You will see the lower part of the pointer describing an arc while moving. This happens also on most analog gauges in the real such as in Vu-meters for example.
+The pointer length is hardwired in code (`nl` variable in the function). The lower part of the pointer (pivot point) will not visible: imagine the pivot point of the pointer covered by a circle. You will see the lower part of the pointer describing an arc while moving. This happens also on most analog gauges in the real such as in Vu-meters for example.
